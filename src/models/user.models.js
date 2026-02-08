@@ -16,7 +16,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      lowecase: true,
+      lowercase: true,
       trim: true,
     },
     fullName: {
@@ -55,24 +55,25 @@ userSchema.pre("save", async function (next) {
   if (this.isModified("password")) {
     //"password" is defined is userSchema
     //Without this condn: Every time we update a user's username or email, the server would take the already-hashed password and hash it again. You would be locked out of your account because the password would be double-scrambled!
-    this.password = bcrypt.hash(this.password, 10);
+    this.password = await bcrypt.hash(this.password, 10);
   }
 
-  next();
+  // next();
 });
+
 //isModifies is builtin mongoose method that checks if specific field has been changed since the last time the document was loaded from the database.
 
 //pre hook to execute something just before data is send to the database
 //run just before data is saved
 
-userSchema.method.isPasswordCorrect = async function (password) {
+userSchema.methods.isPasswordCorrect = async function (password) {
   //we made a custom method (function) to check for passwords
   return await bcrypt.compare(password, this.password);
   // password: plain text entered by user
   // this.password: hashed password stored in the database
 };
 
-userSchema.method.generateAccessToken = function () {
+userSchema.methods.generateAccessToken = function () {
   //we made a custom method (function) to generate accesstoken
   return jwt.sign(
     {
@@ -87,7 +88,7 @@ userSchema.method.generateAccessToken = function () {
     }
   );
 };
-userSchema.method.generateRefreshToken = function () {
+userSchema.methods.generateRefreshToken = function () {
   return jwt.sign(
     {
       _id: this._id,
@@ -99,6 +100,8 @@ userSchema.method.generateRefreshToken = function () {
   );
 };
 
-export const User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+
+export default User;
 
 // Refresh token is stored for long-term login.
