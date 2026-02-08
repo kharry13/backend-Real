@@ -12,3 +12,5 @@ connectDB()
   .catch((err) => {
     console.log("MONGO db connection failed !!!", err);
   });
+
+//connectionInstance: When the connection succeeds, Mongoose returns an object containing details about that connection.

@@ -42,6 +42,14 @@ const videoSchema = new Schema(
 );
 
 videoSchema.plugin(mongooseAggregatePaginate);
+/*
+Add pagination superpowers to my Video schema.
+Pagination means:
+Instead of returning 10,000 videos at once:
+You return them in pages:
+Page 1 → 10 videos
+Page 2 → next 10
+*/
 
 export const Video = mongoose.model("Video", videoSchema);
 
