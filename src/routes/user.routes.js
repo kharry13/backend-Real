@@ -5,7 +5,7 @@ import { upload } from "../middlewares/multer.middleware.js";
 const router = Router();
 
 // http://localhost:8000/api/v1/users/register -> now give control to registerUser
-// first go to upload by multer then to register User
+// first go to upload by multer then to (registerUser)
 router.route("/register").post(
   upload.fields([
     {

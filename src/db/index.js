@@ -1,3 +1,5 @@
+// Connecting my Node backend to MongoDB using mongoose
+
 import mongoose from "mongoose";
 import { DB_NAME } from "../constants.js";
 import { config } from "dotenv";

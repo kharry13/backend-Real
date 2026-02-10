@@ -61,7 +61,7 @@ userSchema.pre("save", async function (next) {
   // next();
 });
 
-//isModifies is builtin mongoose method that checks if specific field has been changed since the last time the document was loaded from the database.
+//isModified is builtin mongoose method that checks if specific field has been changed since the last time the document was loaded from the database.
 
 //pre hook to execute something just before data is send to the database
 //run just before data is saved
@@ -88,6 +88,7 @@ userSchema.methods.generateAccessToken = function () {
     }
   );
 };
+
 userSchema.methods.generateRefreshToken = function () {
   return jwt.sign(
     {

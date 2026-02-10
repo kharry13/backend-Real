@@ -17,6 +17,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   const { fullName, email, username, password } = req.body;
 
+  //checking if any field empty
   if (
     fullName?.trim() === "" ||
     email?.trim() === "" ||
@@ -28,6 +29,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   /*----------------------------------------------------------------*/
 
+  //checking if user already exists
   const existedUser = await User.findOne({ $or: [{ email }, { username }] });
   if (existedUser) {
     throw new ApiError(409, "User with email or username already exists");
@@ -62,6 +64,7 @@ const registerUser = asyncHandler(async (req, res) => {
     username: username.toLowerCase(),
   });
 
+  //Sending back created User to frontend except the password and refreshToken
   const createdUser = await User.findById(user._id).select(
     "-password  -refreshToken"
   );

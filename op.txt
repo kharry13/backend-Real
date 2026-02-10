@@ -1,0 +1,36 @@
+This is from frontend 
+frontend sends this data to the backend in form on -JSON-
+axios.post("/register", {
+  fullName: "HK",
+  email: "hk@gmail.com",
+  password: "1234"
+});
+
+Express doesnt understand json on its own so,
+app.use(bodyParser.json());    --->   If request has JSON body, extract it into req.body
+This data becomes:
+req.body.fullName
+req.body.email
+req.body.password
+
+Express doesnt understand uploaded files(like png) on its own so,
+upload.fields([
+  { name: "avatar" },
+  { name: "coverImage" }
+])
+
+✅ Reads incoming file
+✅ Saves it temporarily
+✅ Adds it into req.files
+
+we can now use req.files.avatar[0].path
+by Multer
+
+
+
+
+
+
+
+
+

@@ -5,6 +5,7 @@ config();
 
 connectDB()
   .then(() => {
+    // If database connects successfully then start the express server
     app.listen(process.env.PORT || 8000, () => {
       console.log(`⚙️ Server is running at port : ${process.env.PORT}`);
     });
@@ -14,3 +15,5 @@ connectDB()
   });
 
 //connectionInstance: When the connection succeeds, Mongoose returns an object containing details about that connection.
+
+//ConnectDB is an async function that returns a promise. || Success-> .then() || Failure -> .catch()
